@@ -19,7 +19,7 @@ export class LetterSorter {
   }
 }
 
-export class PriorityStrategy {
+export class PriorityStrategy implements ISortingStrategy {
   sortLetters(letters: Letter[]) {
     const priorities: TLetterPriority[] = ["high", "medium", "low"];
     return letters.sort(
@@ -28,15 +28,16 @@ export class PriorityStrategy {
   }
 }
 
-export class LengthStrategy {
+export class LengthStrategy implements ISortingStrategy {
   sortLetters(letters: Letter[]) {
     return letters.sort((a, b) => a.content.length - b.content.length);
   }
 }
 
-export class CountryStrategy {
+export class CountryStrategy implements ISortingStrategy {
   sortLetters(letters: Letter[]) {
     const priority: TLetterCountry = "pl";
+
     return letters.sort((a, b) => {
       const firstHasPriority = a.country === priority && b.country !== priority;
       const secondHasPriority =
